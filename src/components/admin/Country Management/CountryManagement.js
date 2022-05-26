@@ -1,29 +1,29 @@
-import React, { useEffect, useState, useMemo } from "react";
-import Loader from "../include/Loader";
-import Menu from "../include/Menu";
-import Popup from "reactjs-popup";
+import React, { useEffect, useState, useMemo } from 'react';
+import Loader from '../include/Loader';
+import Menu from '../include/Menu';
+import Popup from 'reactjs-popup';
 // import "reactjs-popup/dist/index.css";
-import { TableHeader, Pagination, Search } from "../Table";
-import { Dropdown, Table } from "react-bootstrap";
+import { TableHeader, Pagination, Search } from '../Table';
+import { Dropdown, Table } from 'react-bootstrap';
 import {
   deleteDoc,
   doc,
   query,
   collection,
   onSnapshot,
-} from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import PopUp from "./PopUp";
-import PopUpEdit from "./PopUpEdit";
-import { async } from "@firebase/util";
+} from 'firebase/firestore';
+import { db } from '../firebase/firebase';
+import PopUp from './PopUp';
+import PopUpEdit from './PopUpEdit';
+import { async } from '@firebase/util';
 export default function CountryManagement() {
   const [state, setState] = useState(false);
   const [state1, setState1] = useState(false);
   const [listData, setListData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState({ field: "", order: "" });
+  const [search, setSearch] = useState('');
+  const [sorting, setSorting] = useState({ field: '', order: '' });
   const [limit, setlimit] = useState(10);
   const [eVal, seteVal] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,41 +31,41 @@ export default function CountryManagement() {
   const [edit, setEdit] = useState();
   const Header = [
     {
-      name: "Sr. NO.",
-      field: "sr_no",
+      name: 'Sr. NO.',
+      field: 'sr_no',
       sortable: false,
     },
     {
-      name: "Image",
-      field: "image",
+      name: 'Image',
+      field: 'image',
       sortable: false,
     },
     {
-      name: "Continent",
-      field: "continent",
+      name: 'Continent',
+      field: 'continent',
       sortable: false,
     },
     {
-      name: "Country",
-      field: "country",
+      name: 'Country',
+      field: 'country',
       sortable: false,
     },
     {
-      name: "Range (₹)",
+      name: 'Range (₹)',
       sortable: false,
     },
 
     {
-      name: "Edit",
+      name: 'Edit',
       sortable: false,
     },
     {
-      name: "Delete",
+      name: 'Delete',
       sortable: false,
     },
   ];
   const getData = () => {
-    const q = query(collection(db, "cities"));
+    const q = query(collection(db, 'cities'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const cities = [];
       let i = 1;
@@ -83,10 +83,10 @@ export default function CountryManagement() {
   useEffect(() => {
     getData();
 
-    document.getElementById("page-loader").style.display = "none";
+    document.getElementById('page-loader').style.display = 'none';
 
-    var element = document.getElementById("page-container");
-    element.classList.add("show");
+    var element = document.getElementById('page-container');
+    element.classList.add('show');
   }, []);
 
   const commentsData = useMemo(() => {
@@ -105,7 +105,7 @@ export default function CountryManagement() {
 
     //Sorting comments
     if (sorting.field) {
-      const reversed = sorting.order === "asc" ? 1 : -1;
+      const reversed = sorting.order === 'asc' ? 1 : -1;
       computedComments = computedComments.sort(
         (a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field])
       );
@@ -141,9 +141,14 @@ export default function CountryManagement() {
           <div className="popup">
             <button
               className="btn btn-outline-success"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
               style={{
-                borderRadius: "20px",
-                marginBottom: "20px",
+                borderRadius: '20px',
+                marginBottom: '20px',
               }}
               onClick={() => {
                 setState1(false);
@@ -166,10 +171,9 @@ export default function CountryManagement() {
           {!state && !state1 ? (
             <div
               style={{
-                backgroundColor: "white",
-                padding: "20px",
-                borderRadius: "20px",
-                marginTop: "10px",
+                backgroundColor: 'white',
+                padding: '20px',
+                borderRadius: '20px',
               }}
             >
               <div className="row w-100">
@@ -191,11 +195,11 @@ export default function CountryManagement() {
                     <div className="col-xl-6 col-lg-6 col-sm-6 col-12 d-flex justify-content-end mb-3">
                       <div
                         style={{
-                          color: "black",
-                          fontSize: "12px",
-                          fontWeight: "300",
-                          paddingTop: "0px",
-                          paddingBottom: "0px",
+                          color: 'black',
+                          fontSize: '12px',
+                          fontWeight: '300',
+                          paddingTop: '0px',
+                          paddingBottom: '0px',
                         }}
                         className="align-self-center"
                       >
@@ -207,11 +211,11 @@ export default function CountryManagement() {
                             variant="none"
                             id="dropdown-basic"
                             style={{
-                              cursor: "auto",
-                              backgroundColor: "white",
-                              borderColor: "#d5dbe0",
-                              paddingBottom: "3px",
-                              paddingTop: "3px",
+                              cursor: 'auto',
+                              backgroundColor: 'white',
+                              borderColor: '#d5dbe0',
+                              paddingBottom: '3px',
+                              paddingTop: '3px',
                             }}
                           >
                             {limit}&nbsp;<i class="fa fa-caret-down"></i>
@@ -278,28 +282,28 @@ export default function CountryManagement() {
                       lockScroll={true}
                       onClose={() => setShow(false)}
                       contentStyle={{
-                        paddingInline: "20px",
-                        paddingBlock: "10px",
+                        paddingInline: '20px',
+                        paddingBlock: '10px',
                         // marginTop: "50vh",
                         // marginBlockStart: "10vh",
 
-                        top: window.innerWidth >= 678 ? "-30vh" : "15vh",
+                        //top: window.innerWidth >= 678 ? '-30vh' : '15vh',
 
-                        marginInline: window.innerWidth >= 678 ? "75vh" : null,
+                        marginInline: window.innerWidth >= 678 ? '75vh' : null,
                       }}
                     >
                       {(close) => (
                         <div>
                           <div class="d-flex justify-content-around align-items-center ">
                             <div className="header">
-                              Do you want to delete?{" "}
+                              Do you want to delete?{' '}
                             </div>
                             <p
                               onClick={() => {
                                 close();
                                 setShow(false);
                               }}
-                              style={{ fontSize: "25px", cursor: "pointer" }}
+                              style={{ fontSize: '25px', cursor: 'pointer' }}
                             >
                               &times;
                             </p>
@@ -309,14 +313,14 @@ export default function CountryManagement() {
                             <button
                               className="btn btn-outline-success"
                               onClick={async () => {
-                                await deleteDoc(doc(db, "cities", eVal.id));
+                                await deleteDoc(doc(db, 'cities', eVal.id));
                                 setShow(false);
                                 close();
                               }}
                               style={{
-                                marginInlineEnd: "15px",
-                                backgroundColor: "rgb(35, 21, 73)",
-                                color: "white",
+                                marginInlineEnd: '15px',
+                                backgroundColor: 'rgb(35, 21, 73)',
+                                color: 'white',
                               }}
                             >
                               Yes
@@ -328,7 +332,7 @@ export default function CountryManagement() {
                                 setShow(false);
                               }}
                               style={{
-                                marginInlineEnd: "15px",
+                                marginInlineEnd: '15px',
                               }}
                             >
                               Cancel
@@ -369,7 +373,7 @@ export default function CountryManagement() {
                                 <td>
                                   <i
                                     className="fa fa-eye edit"
-                                    style={{ cursor: "pointer" }}
+                                    style={{ cursor: 'pointer' }}
                                     onClick={() => {
                                       console.log(e);
                                       setState(false);
@@ -382,7 +386,7 @@ export default function CountryManagement() {
                                 <td>
                                   <i
                                     className="fa fa-trash delete"
-                                    style={{ cursor: "pointer" }}
+                                    style={{ cursor: 'pointer' }}
                                     onClick={async () => {
                                       // setModalOpen(true);
                                       // async () => {
@@ -410,7 +414,7 @@ export default function CountryManagement() {
                   <div
                     className="mt-2 d-flex justify-content-sm-center justify-content-xs-center justify-content-lg-end"
                     style={{
-                      overflowX: "auto",
+                      overflowX: 'auto',
                     }}
                   >
                     <Pagination

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useMemo } from "react";
-import SelectionDropdown from "../Country Management/components/SelectionDropdown";
-import SelectionDropdownMonth from "../Country Management/components/SelectionDropdownMonth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
-import Data from "../json/countryByContinent.json";
-import currencyData from "../json/countryByCurrency.json";
+import React, { useEffect, useState, useMemo } from 'react';
+import SelectionDropdown from '../Country Management/components/SelectionDropdown';
+import SelectionDropdownMonth from '../Country Management/components/SelectionDropdownMonth';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import Data from '../json/countryByContinent.json';
+import currencyData from '../json/countryByCurrency.json';
 
 export default function LocationPopUp(props) {
   const [countryList, setCountryList] = useState([]);
@@ -14,38 +14,38 @@ export default function LocationPopUp(props) {
   const [currency, setCurrency] = useState();
   const [month, setMonth] = useState([]);
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState({});
   const [addPicture, setAddPicture] = useState(false);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState('');
   const [change, setchange] = useState(false);
   const [showImg, setShowImg] = useState({
-    src: "",
-    alt: "",
+    src: '',
+    alt: '',
   });
-  let [state, setState] = useState("");
-  let [stateOfActivities, setStateOfActivities] = useState("");
+  let [state, setState] = useState('');
+  let [stateOfActivities, setStateOfActivities] = useState('');
   const [activities, setActivities] = useState([]);
   const [topDestinations, setTopDestinations] = useState([]);
   const [formData, setFormData] = useState({
-    budgetFrom: "",
-    budgetTo: "",
-    safetyGuidelines: "",
-    purpose: "",
-    summary: "",
+    budgetFrom: '',
+    budgetTo: '',
+    safetyGuidelines: '',
+    purpose: '',
+    summary: '',
     //currency: '',
   });
   const [option1, setOption1] = useState(false);
@@ -66,7 +66,7 @@ export default function LocationPopUp(props) {
     setCurrencyList([...new Set(currencyList)]);
   }, []);
 
-  var file = "";
+  var file = '';
   const uploadPicture = async (e) => {
     e.preventDefault();
     setDisable(true);
@@ -97,31 +97,31 @@ export default function LocationPopUp(props) {
     let error = {};
     if (!country) {
       isValid = false;
-      error["countryName"] = "Please select country name";
+      error['countryName'] = 'Please select country name';
     }
     if (!addPicture) {
       isValid = false;
-      error["img_err"] = "Please select the image.";
+      error['img_err'] = 'Please select the image.';
     }
-    if (!input["purpose"].trim()) {
+    if (!input['purpose'].trim()) {
       isValid = false;
-      error["purpose"] = "Please enter purpose";
+      error['purpose'] = 'Please enter purpose';
     }
-    if (!input["summary"].trim()) {
+    if (!input['summary'].trim()) {
       isValid = false;
-      error["summary"] = "Please enter summary";
+      error['summary'] = 'Please enter summary';
     }
     if (activities.length === 0) {
       isValid = false;
-      error["activities"] = "Please enter name of activities ";
+      error['activities'] = 'Please enter name of activities ';
     }
     if (topDestinations.length === 0) {
       isValid = false;
-      error["placeToVisit"] = "Please enter name of place ";
+      error['placeToVisit'] = 'Please enter name of place ';
     }
     if (!currency) {
       isValid = false;
-      error["currency"] = "Please select currency";
+      error['currency'] = 'Please select currency';
     }
     //if (!input['budgetFrom']) {
     //isValid = false;
@@ -140,30 +140,30 @@ export default function LocationPopUp(props) {
     //error['budgetInvalid'] =
     //"Maximum value can't be less then minimum (Ex. : from:4000 To: 4100)";
     //}
-    if (!input["budgetFrom"]) {
+    if (!input['budgetFrom']) {
       isValid = false;
-      error["budget"] = "Please enter budget";
-    } else if (!input["budgetTo"]) {
+      error['budget'] = 'Please enter budget';
+    } else if (!input['budgetTo']) {
       isValid = false;
-      error["budget"] = "Please enter budget";
+      error['budget'] = 'Please enter budget';
     } else if (formData.budgetFrom <= 0) {
       isValid = false;
-      error["budget"] = "Amount should be positive";
+      error['budget'] = 'Amount should be positive';
     } else if (formData.budgetTo <= 0) {
       isValid = false;
-      error["budget"] = "Amount should be positive";
+      error['budget'] = 'Amount should be positive';
     } else if (formData.budgetFrom >= formData.budgetTo) {
       isValid = false;
-      error["budgetInvalid"] =
+      error['budgetInvalid'] =
         "Maximum value can't be less then minimum (Ex. : from:4000 To: 4100)";
     }
-    if (!input["safetyGuidelines"].trim()) {
+    if (!input['safetyGuidelines'].trim()) {
       isValid = false;
-      error["safetyGuidelines"] = "Please enter guidelines";
+      error['safetyGuidelines'] = 'Please enter guidelines';
     }
     if (month.length === 0) {
       isValid = false;
-      error["bestMonths"] = "Please enter months";
+      error['bestMonths'] = 'Please enter months';
     }
     if (
       option1 == false &&
@@ -173,7 +173,7 @@ export default function LocationPopUp(props) {
       option5 == false
     ) {
       isValid = false;
-      error["multiChoice"] = "Please select any one";
+      error['multiChoice'] = 'Please select any one';
     }
     setError(error);
     return isValid;
@@ -212,14 +212,14 @@ export default function LocationPopUp(props) {
       uploadDataList(tempData).then(() => {
         // navigate("/country-management");
         setShowImg({
-          src: "",
-          alt: "",
+          src: '',
+          alt: '',
         });
         setFormData({
-          description: "",
-          budgetFrom: "",
-          budgetTo: "",
-          safetyGuidelines: "",
+          description: '',
+          budgetFrom: '',
+          budgetTo: '',
+          safetyGuidelines: '',
         });
         setMonth([]);
         setTopDestinations([]);
@@ -232,13 +232,13 @@ export default function LocationPopUp(props) {
   return (
     <>
       <button
-        className="btn btn-primary "
+        className="btn btn-outline-success "
         type="button"
         data-toggle="collapse"
         data-target="#collapseExample"
         aria-expanded="false"
         aria-controls="collapseExample"
-        style={{ borderRadius: "20px" }}
+        style={{ borderRadius: '20px' }}
         onClick={() => props.setState(!props.state)}
       >
         Add Location
@@ -247,9 +247,9 @@ export default function LocationPopUp(props) {
       <div
         className="collapse mt-2"
         id="collapseExample"
-        style={{ borderRadius: "20px" }}
+        style={{ borderRadius: '20px' }}
       >
-        <div className="card card-body " style={{ borderRadius: "20px" }}>
+        <div className="card card-body " style={{ borderRadius: '20px' }}>
           <div className="d-flex justify-content-center">
             <div>
               <div>
@@ -264,7 +264,7 @@ export default function LocationPopUp(props) {
                       list={months}
                       setState={(e) => {
                         if (e) {
-                          if (e != "Select Month") {
+                          if (e != 'Select Month') {
                             setMonth([...new Set([...month, e])]);
                           }
                         }
@@ -272,7 +272,7 @@ export default function LocationPopUp(props) {
                       label=" Best Months to Visit:"
                       firstOption="Select Month"
                     />
-                    <div className="text-danger" style={{ marginTop: "-15px" }}>
+                    <div className="text-danger" style={{ marginTop: '-15px' }}>
                       {error.bestMonths}
                     </div>
 
@@ -287,7 +287,7 @@ export default function LocationPopUp(props) {
                                   e.preventDefault();
                                 }}
                               >
-                                {subItems}{" "}
+                                {subItems}{' '}
                                 <span className="placeDeleteIcon">
                                   <i
                                     className="fa fa-trash placeDeleteIcon"
@@ -326,7 +326,7 @@ export default function LocationPopUp(props) {
                           name="option1"
                           value="option1"
                           onClick={(e) => setOption1(!option1)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         />
                         <label
                           className="form-check-label mb-2 checkBox"
@@ -343,7 +343,7 @@ export default function LocationPopUp(props) {
                           name="option2"
                           value="option2"
                           onClick={(e) => setOption2(!option2)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         />
                         <label
                           className="form-check-label mb-2 checkBox"
@@ -360,7 +360,7 @@ export default function LocationPopUp(props) {
                           value="option3"
                           name="option3"
                           onClick={(e) => setOption3(!option3)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         />
                         <label
                           className="form-check-label mb-2 checkBox"
@@ -377,7 +377,7 @@ export default function LocationPopUp(props) {
                           value="option4"
                           name="option4"
                           onClick={(e) => setOption4(!option4)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         />
                         <label
                           className="form-check-label mb-2 checkBox"
@@ -394,7 +394,7 @@ export default function LocationPopUp(props) {
                           value="option5"
                           name="option5"
                           onClick={(e) => setOption5(!option5)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         />
                         <label
                           className="form-check-label mb-2 checkBox"
@@ -417,8 +417,8 @@ export default function LocationPopUp(props) {
                         <label
                           for="exampleInputPassword1"
                           style={{
-                            marginTop: "16px",
-                            marginRight: "5px",
+                            marginTop: '16px',
+                            marginRight: '5px',
                           }}
                         >
                           From:
@@ -442,8 +442,8 @@ export default function LocationPopUp(props) {
                         <label
                           for="exampleInputPassword1"
                           style={{
-                            marginTop: "16px",
-                            marginRight: "5px",
+                            marginTop: '16px',
+                            marginRight: '5px',
                           }}
                         >
                           To:
@@ -482,15 +482,15 @@ export default function LocationPopUp(props) {
                         onChange={(e) => {
                           if (e.target.value.trim().length != 0)
                             setStateOfActivities(e.target.value);
-                          else setStateOfActivities("");
+                          else setStateOfActivities('');
                         }}
                       />
                       <button
                         className="btn btn-sm btn-primary"
                         style={{
-                          borderRadius: "20px",
-                          height: "30px",
-                          marginTop: "14px",
+                          borderRadius: '20px',
+                          height: '30px',
+                          marginTop: '14px',
                         }}
                         onClick={(e) => {
                           e.preventDefault();
@@ -498,7 +498,7 @@ export default function LocationPopUp(props) {
                             setActivities([
                               ...new Set([...activities, stateOfActivities]),
                             ]);
-                          setStateOfActivities("");
+                          setStateOfActivities('');
                         }}
                       >
                         Add
@@ -563,49 +563,49 @@ export default function LocationPopUp(props) {
                   </div>
 
                   {/* country */}
-                  <div style={{ marginBottom: "35px" }}>
+                  <div style={{ marginBottom: '35px' }}>
                     <SelectionDropdown
                       list={countryList}
                       setState={(e) => {
-                        if (e != "Select Country") {
+                        if (e != 'Select Country') {
                           setCountry(e);
                         } else {
-                          setCountry("");
+                          setCountry('');
                         }
                       }}
                       label="Country Name:"
                       firstOption="Select Country"
                     />
-                    <div className="text-danger" style={{ marginTop: "-25px" }}>
+                    <div className="text-danger" style={{ marginTop: '-25px' }}>
                       {error.countryName}
                     </div>
                   </div>
 
                   {/* image */}
-                  <div className="form-group" style={{ marginBottom: "30px" }}>
+                  <div className="form-group" style={{ marginBottom: '30px' }}>
                     <label for="exampleFormControlFile1">Image:</label>
                     <input
                       type="file"
                       className="form-control-file imgInput"
                       id="exampleFormControlFile1"
                       onChange={uploadPicture}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                     />
                     <div className="text-danger">{error.img_err}</div>
-                    {showImg.src != "" ? (
+                    {showImg.src != '' ? (
                       <img
                         src={showImg.src}
                         className="form-img__img-preview"
-                        style={{ width: "84px", height: "84px" }}
+                        style={{ width: '84px', height: '84px' }}
                         alt={showImg.alt}
                       />
                     ) : (
-                      ""
+                      ''
                     )}
                   </div>
 
                   {/* summary of the destination */}
-                  <div className="form-group" style={{ marginBottom: "30px" }}>
+                  <div className="form-group" style={{ marginBottom: '30px' }}>
                     <label for="exampleFormControlTextarea1">
                       Summary of the destination:
                     </label>
@@ -641,15 +641,15 @@ export default function LocationPopUp(props) {
                         onChange={(e) => {
                           if (e.target.value.trim().length != 0)
                             setState(e.target.value);
-                          else setState("");
+                          else setState('');
                         }}
                       />
                       <button
                         className="btn btn-sm btn-primary"
                         style={{
-                          borderRadius: "20px",
-                          height: "30px",
-                          marginTop: "14px",
+                          borderRadius: '20px',
+                          height: '30px',
+                          marginTop: '14px',
                         }}
                         onClick={(e) => {
                           e.preventDefault();
@@ -657,7 +657,7 @@ export default function LocationPopUp(props) {
                             setTopDestinations([
                               ...new Set([...topDestinations, state]),
                             ]);
-                          setState("");
+                          setState('');
                         }}
                       >
                         Add
@@ -719,20 +719,20 @@ export default function LocationPopUp(props) {
                         </div> */}
 
                   {/* Currency */}
-                  <div style={{ marginBottom: "35px" }}>
+                  <div style={{ marginBottom: '35px' }}>
                     <SelectionDropdown
                       list={currencyList}
                       setState={(e) => {
-                        if (e != "Select Currency") {
+                        if (e != 'Select Currency') {
                           setCurrency(e);
                         } else {
-                          setCurrency("");
+                          setCurrency('');
                         }
                       }}
                       label="Currency:"
                       firstOption="Select Currency"
                     />
-                    <div className="text-danger" style={{ marginTop: "-25px" }}>
+                    <div className="text-danger" style={{ marginTop: '-25px' }}>
                       {error.currency}
                     </div>
                   </div>
@@ -762,13 +762,13 @@ export default function LocationPopUp(props) {
                     type="submit"
                     className="btn btn-primary"
                     disabled={disable}
-                    style={{ borderRadius: "20px" }}
+                    style={{ borderRadius: '20px' }}
                     onClick={(e) => {
                       submitHandler(e);
                       if (validate());
                     }}
                   >
-                    {disable ? "Processing..." : "Upload"}
+                    {disable ? 'Processing...' : 'Upload'}
                   </button>
                 </form>
               </div>
