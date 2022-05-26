@@ -229,7 +229,7 @@ export default function PopUp(props) {
               }}
             >
               {/* px-5 w-75  */}
-              <div className=" ">
+              <div>
                 <br />
 
                 <div>
