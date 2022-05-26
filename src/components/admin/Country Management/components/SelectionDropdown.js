@@ -34,7 +34,7 @@ const Dropdown = ({ options, value, onChange, firstOption }) => {
           value={value}
           onChange={onChange}
           id="exampleInputPassword1"
-          className="form-control form-select ml-0 w-auto"
+          className="form-control form-select ml-0 w-auto select"
           style={{
             cursor: 'pointer',
             borderRadius: '17px',

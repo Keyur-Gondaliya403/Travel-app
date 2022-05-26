@@ -250,7 +250,7 @@ export default function LocationPopUp(props) {
         style={{ borderRadius: '20px' }}
       >
         <div className="card card-body " style={{ borderRadius: '20px' }}>
-          <div className="d-flex justify-content-center">
+          <div className="">
             <div>
               <div>
                 <form className="CountryForm" autocomplete="off">

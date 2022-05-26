@@ -284,11 +284,21 @@ input {
 .CountryForm {
   width: 700px !important;
 }
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   .CountryForm {
-    width: 300px !important;
+    width: 600px !important;
     padding-left: 0px;
     padding-top: 0px;
+  }
+}
+@media (max-width: 950px) {
+  .CountryForm {
+    width: 100% !important;
+    padding-left: 0px;
+    padding-top: 0px;
+  }
+  .select {
+    width: 100% !important;
   }
 }
 .CountryForm label {
@@ -428,7 +438,4 @@ input {
   .example {
     background: pink;
   }
-}
-
-.LocationForm {
 }
